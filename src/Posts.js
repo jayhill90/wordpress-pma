@@ -29,10 +29,10 @@ componentDidMount() {
     return(
       <div>
         {this.state.post.map((post, i) => (
-        <div>
+        <div key={post.id}>
         <div>Post ID: {post.id} </div>
         <div><h3>{post.title.rendered}</h3></div>
-        <ReactMarkdown escapeHtml  source={post.content.rendered} />
+        <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
         </div>
         ))}
       </div>

@@ -14,15 +14,21 @@ class SinglePage extends Component {
       content: '',
       date: '',
     };
-  }
-  componentWillReceiveProps(newProps) {
-    this.props = newProps;
-  }
 
+    this.updatePost = this.updatePost.bind(this);
+  }
 
   componentDidMount() {
+    this.updatePost(this.props.match.params.slug);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updatePost(nextProps.match.params.slug);
+  }
+
+  updatePost(slug) {
     //console.log(this.props);
-    const url = `https://defc0re.wpengine.com/wp-json/wp/v2/pages?slug=${this.props.match.params.slug}`;
+    const url = `https://defc0re.wpengine.com/wp-json/wp/v2/pages?slug=${slug}`;
     fetch(url)
     .then(results => {
       return results.json();
@@ -58,7 +64,7 @@ class SinglePage extends Component {
       <div>
         <h3>{this.state.title}</h3>
         <h5>{this.state.date}</h5>
-        <div>{this.state.content}</div>
+        <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
       </div>
     );
   }

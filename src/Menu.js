@@ -40,7 +40,7 @@ class Menu extends Component {
     return(
       <div>
         {this.state.menu.map((menu, i) => (
-          <div className="test">
+          <div className="test" key={`${menu.title}-${i}`}>
               <div> <Link to={`${this.buildLink(menu.title)}`}>{menu.title}</Link></div>
           </div>
         ))}
