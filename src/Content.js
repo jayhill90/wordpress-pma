@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Posts from './Posts';
 import SinglePage from './SinglePage';
+import SinglePost from './SinglePost';
 import {
   Route,
   Switch
@@ -13,6 +14,7 @@ class Content extends Component {
       <Switch>
         <Route path='/' exact component={Posts}/>
         <Route path='/:slug' params=':slug' component={SinglePage}/>
+        <Route exact path='/blog/:id' params=':id' component={SinglePost}/>
       </Switch>
 
     );

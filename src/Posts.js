@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ReactMarkdown from 'react-markdown';
-
+import { Link } from 'react-router-dom'
 class Posts extends Component {
 
   constructor(props){
@@ -25,13 +24,18 @@ componentDidMount() {
   });
 }
 
+buildLink(slug, title) {
+    console.log(title);
+    return `blog/${slug}`;
+  }
+
   render(){
     return(
       <div>
         {this.state.post.map((post, i) => (
         <div key={post.id}>
         <div>Post ID: {post.id} </div>
-        <div><h3>{post.title.rendered}</h3></div>
+        <div><h3><Link to={`${this.buildLink(post.slug, post.id)}`}>{post.title.rendered}</Link></h3></div>
         <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
         </div>
         ))}
